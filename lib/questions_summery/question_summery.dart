@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:third_app/questions_summery/summery_item.dart';
 
 class QuestionSummery extends StatelessWidget {
   final List<Map<String, Object>> summeryData;
@@ -8,7 +9,7 @@ class QuestionSummery extends StatelessWidget {
   @override
   Widget build(context) {
     return SizedBox(
-      height: 300,
+      height: 400,
       child: SingleChildScrollView(
         child: Column(
           children: summeryData.map((data) {
@@ -17,14 +18,9 @@ class QuestionSummery extends StatelessWidget {
                 Text(((data['question_index'] as int) + 1).toString()),
                 Expanded(
                   child: Column(
-                    children: [
-                      Text((data['question']).toString()),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text((data['user_answer']).toString()),
-                      Text((data['correct_answer']).toString()),
-                    ],
+                    children: summeryData.map((data) {
+                      return SummeryItem(data);
+                    }).toList(),
                   ),
                 )
               ],

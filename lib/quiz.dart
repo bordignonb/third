@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
-import 'package:third_app/questions_screen.dart';
-import 'package:third_app/start_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:third_app/data/questions.dart';
+import 'package:third_app/questions_screen.dart';
 import 'package:third_app/result_screen.dart';
+import 'package:third_app/start_screen.dart';
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
@@ -29,9 +28,15 @@ class _QuizState extends State<Quiz> {
     if (selectedAnswer.length == questions.length) {
       setState(() {
         activeScreen = 'results_screen';
-
       });
     }
+  }
+
+  void restartQuiz() {
+    setState(() {
+      selectedAnswer = [];
+      activeScreen = 'questions-screen';
+    });
   }
 
   @override
@@ -41,7 +46,10 @@ class _QuizState extends State<Quiz> {
       screenWidget = QuestionScreen(onSelectedAnswer: chooseAnswer);
     }
     if (activeScreen == 'results_screen') {
-      screenWidget =  ResultScreen(chosenAnswer: selectedAnswer);
+      screenWidget = ResultScreen(
+        chosenAnswer: selectedAnswer,
+        onRestart: restartQuiz,
+      );
     }
     return MaterialApp(
       theme: ThemeData(
