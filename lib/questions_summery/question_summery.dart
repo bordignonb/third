@@ -7,27 +7,15 @@ class QuestionSummery extends StatelessWidget {
   const QuestionSummery({required this.summeryData, super.key});
 
   @override
-  Widget build(context) {
+  Widget build(BuildContext context) {
     return SizedBox(
-      height: 400,
-      child: SingleChildScrollView(
-        child: Column(
-          children: summeryData.map((data) {
-            return Row(
-              children: [
-                Text(((data['question_index'] as int) + 1).toString()),
-                Expanded(
-                  child: Column(
-                    children: summeryData.map((data) {
-                      return SummeryItem(data);
-                    }).toList(),
-                  ),
-                )
-              ],
-            );
-          }).toList(),
-        ),
-      ),
-    );
+        height: 400,
+        child: SingleChildScrollView(
+          child: Column(
+            children: summeryData.map((data) {
+              return SummeryItem(data);
+            }).toList(),
+          ),
+        ));
   }
 }
